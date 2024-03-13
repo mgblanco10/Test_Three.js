@@ -68,7 +68,7 @@ export const Player = () => {
 
     api.velocity.set(
       direction.x,
-      vel.current[1], // ???? saltar.
+      vel.current[1], // ???? saltar
       direction.z
     )
 
