@@ -1,0 +1,74 @@
+<!-- diferent color cuber  -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Learning</title>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <!-- Script con Three.js desde un CDN -->
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.155.0/build/three.module.js";
+
+      // Crear la escena
+      const scene = new THREE.Scene();
+
+      // Configurar la cámara
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const viewAngle = 75;
+      const nearClipping = 0.1;
+      const farClipping = 1000;
+
+      const camera = new THREE.PerspectiveCamera(
+        viewAngle,
+        width / height,
+        nearClipping,
+        farClipping
+      );
+      camera.position.set(0, 0, 15);
+
+      // Crear múltiples cubos de diferentes colores
+      const cubeData = [
+        { color: "red", position: [-3, 3, 0] },
+        { color: "orange", position: [0, 3, 0] },
+        { color: "blue", position: [3, 3, 0] },
+        { color: "green", position: [-3, 0, 0] },
+        { color: "yellow", position: [0, 0, 0] },
+        { color: "skyblue", position: [3, 0, 0] },
+        { color: "white", position: [-3, -3, 0] },
+        { color: "red", position: [0, -3, 0] },
+        { color: "red", position: [3, -3, 0] },
+      ];
+
+      cubeData.forEach((data) => {
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: data.color });
+        const cube = new THREE.Mesh(geometry, material);
+        cube.position.set(...data.position);
+        scene.add(cube);
+      });
+
+      // Configurar el renderer
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(width, height);
+
+      // Agregar el renderer al DOM
+      const container = document.getElementById("container");
+      container.appendChild(renderer.domElement);
+
+      // Animación
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>

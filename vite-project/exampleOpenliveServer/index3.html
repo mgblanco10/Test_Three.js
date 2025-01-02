@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Learning</title>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <!-- Código JS -->
+    <script type="module">
+      // Importar Three.js desde el CDN (versión específica)
+      import * as THREE from "https://unpkg.com/three@0.155.0/build/three.module.js";
+
+      // Crear la escena
+      const scene = new THREE.Scene();
+
+      // Configurar la cámara
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const viewAngle = 45;
+      const nearClipping = 0.1;
+      const farClipping = 1000;
+
+      const camera = new THREE.PerspectiveCamera(
+        viewAngle,
+        width / height,
+        nearClipping,
+        farClipping
+      );
+      camera.position.set(0, 0, 10);
+      scene.add(camera);
+
+      // Crear un cubo
+      const cubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+      const cubeMaterial = new THREE.MeshBasicMaterial({ color: "red" });
+      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+      cube.position.set(-5, 0, 0);
+      scene.add(cube);
+
+      // Crear una cápsula
+      const capsuleGeometry = new THREE.CapsuleGeometry(1, 1);
+      const capsuleMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      const capsule = new THREE.Mesh(capsuleGeometry, capsuleMaterial);
+      scene.add(capsule);
+
+      // Crear un cono
+      const coneGeometry = new THREE.ConeGeometry(2, 5, 32);
+      const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+      const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+      cone.position.set(5, 0, 0);
+      scene.add(cone);
+
+      // Configurar el renderer
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(width, height);
+
+      // Agregar el renderer al DOM
+      const container = document.getElementById("container");
+      container.appendChild(renderer.domElement);
+
+      // Función de animación
+      function animate() {
+        cube.rotation.y += 0.01;
+        capsule.rotation.x += 0.01;
+        cone.rotation.z += 0.01;
+
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
