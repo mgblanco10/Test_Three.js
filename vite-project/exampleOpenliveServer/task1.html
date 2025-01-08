@@ -10,15 +10,12 @@
 
   <body>
     <div id="container"></div>
-
-    <!-- Script con Three.js desde un CDN -->
     <script type="module">
       import * as THREE from "https://unpkg.com/three@0.155.0/build/three.module.js";
 
-      // Crear la escena
       const scene = new THREE.Scene();
 
-      // Configurar la cámara
+      // Cámara
       const width = window.innerWidth;
       const height = window.innerHeight;
       const viewAngle = 75;
