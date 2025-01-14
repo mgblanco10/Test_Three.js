@@ -18,4 +18,4 @@ Clon de Minecraft hecho con
 - @react-three/fiber
 - ViteJS (Empaquetador)
 
-Basado en el vídeo de FreecodeCamp
+Basado en el vídeo de FreecodeCamp..
